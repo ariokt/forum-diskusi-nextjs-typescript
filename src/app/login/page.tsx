@@ -6,8 +6,16 @@ import Image from "next/image";
 import EraspaceImage from "@/images/astronot.png";
 import Link from "next/link";
 import ThreadsLogo from "@/images/threads-logo.png";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 export default function Page() {
+  const cookieStore = cookies();
+  const user = cookieStore.get('dataUser');
+  if (user) {
+    redirect('/');
+  }
+
   return (
     <main className="flex flex-col min-h-screen justify-center">
       <Link href={'/'} className="w-fit mx-auto"><Image alt="threads logo" src={ThreadsLogo} height={24} /></Link>
