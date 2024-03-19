@@ -1,5 +1,5 @@
 'use client'
-import handleErrorLoginRegister from "@/helpers/handleErrorLoginRegister";
+import { handleErrorLoginRegister } from "@/utils/index";
 import useInput from "@/hooks/useInput";
 import { apiGetUserDetail, apiLogin } from "@/utils/utils";
 import Link from "next/link";
