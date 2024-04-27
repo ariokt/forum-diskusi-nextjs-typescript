@@ -2,10 +2,11 @@
 import useInput from "@/hooks/useInput";
 import dynamic from 'next/dynamic';
 import 'react-quill/dist/quill.snow.css';
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { apiCreateThread } from "@/utils/utils";
 import { useRouter } from "next/navigation";
 import { useToast } from "@chakra-ui/react";
+import { LoadingContext } from "@/app/providers";
 
 const QuillEditor = dynamic(() => import('react-quill'), { ssr: false });
 
@@ -45,6 +46,8 @@ const AddThreadForm: React.FC<{ token: string }> = ({ token }) => {
   const [category, handleInputCategory] = useInput('');
   const [body, setBody] = useState('');
 
+  const { loading, setLoading } = useContext(LoadingContext);
+
   const handleEditorChange = (newContent: string): void => {
     setBody(newContent);
   };
@@ -53,9 +56,9 @@ const AddThreadForm: React.FC<{ token: string }> = ({ token }) => {
     e.preventDefault();
     try {
       if (title && body) {
+        setLoading(true);
         const data = { title, body, category }
         const response = await apiCreateThread(data, token);
-        console.log(response);
         if (response.data.status === 'success') {
           toast({
             position: 'top',
@@ -66,12 +69,15 @@ const AddThreadForm: React.FC<{ token: string }> = ({ token }) => {
             isClosable: true,
           });
           router.push('/', { scroll: false });
+          router.refresh();
         }
       } else {
         window.alert('Mohon lengkapi data terlebih dahulu!')
       }
     } catch (error: any) {
       window.alert(error.response.data.message);
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -90,7 +96,12 @@ const AddThreadForm: React.FC<{ token: string }> = ({ token }) => {
           formats={quillFormats}
           className="w-full h-[70%] bg-white"
         />
-        <button type="submit" className="p-2 bg-black text-white w-fit rounded">Submit</button>
+        {
+          loading ?
+          <button className="p-2 bg-gray-500 text-white w-fit rounded" >Submit</button>
+          :
+          <button type="submit" className="p-2 bg-black text-white w-fit rounded" >Submit</button>
+        }
       </form>
     </div>
   );

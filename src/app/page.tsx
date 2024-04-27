@@ -2,7 +2,6 @@ import Navbar from "@/components/Navbar";
 import type { Metadata } from "next";
 import ThreadList from "@/components/ThreadList";
 import { apiGetAllThreads, apiGetAllUsers } from "@/utils/utils";
-import Link from "next/link";
 import AddThreadLinkButton from "@/components/AddThreadLinkButton";
 
 export const metadata: Metadata = {
