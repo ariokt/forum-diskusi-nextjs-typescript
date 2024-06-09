@@ -104,7 +104,7 @@ function ThreadDetail({ threadDetail }: { threadDetail: ThreadDetail }) {
         <div className="mb-4">
           <h5 className="mb-2 text-md font-bold">
             Komentar (
-            {comments.length}
+            {displayedComments.length}
             )
           </h5>
           <CommentsList comments={displayedComments} threadId={id} />
