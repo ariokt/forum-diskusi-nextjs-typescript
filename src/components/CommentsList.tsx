@@ -6,7 +6,6 @@ interface CommentsList {
 }
 
 const CommentsList: React.FC<CommentsList> = ({ comments, threadId }) => {
-  const countComment = comments.length;
   return (
     <>
       { comments.map((comment, index) => (

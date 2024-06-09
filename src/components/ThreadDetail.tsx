@@ -8,6 +8,8 @@ import { useRouter } from 'next/navigation';
 import { useToast } from "@chakra-ui/react";
 import { apiLoveThread, apiUnloveThread } from '@/utils/utils';
 import CommentsList from './CommentsList';
+import { redirect } from "next/navigation";
+import CommentAdd from './CommentAdd';
 
 export interface ThreadDetail {
   id: string;
@@ -22,12 +24,18 @@ export interface ThreadDetail {
 }
 
 function ThreadDetail({ threadDetail }: { threadDetail: ThreadDetail }) {
-  const { id, title, body, createdAt, owner, category, comments, upVotesBy, downVotesBy } = threadDetail;
+
+  if (!threadDetail) {
+    redirect('/');
+  }
+
+  const { id, title, body, createdAt, owner, category, comments, upVotesBy } = threadDetail;
   const router = useRouter();
   const toast = useToast();
   const cookies = new Cookies();
   const dataUser = cookies.get('dataUser');
   const [isLiked, setIsLiked] = useState(false);
+  const [displayedComments, setDisplayedComments] = useState(comments);
 
   useEffect(() => {
     if (dataUser && upVotesBy.includes(dataUser.id)) {
@@ -52,7 +60,7 @@ function ThreadDetail({ threadDetail }: { threadDetail: ThreadDetail }) {
           status: 'error',
           duration: 3000,
           isClosable: true,
-        })
+        });
       }
     }
   }
@@ -77,7 +85,7 @@ function ThreadDetail({ threadDetail }: { threadDetail: ThreadDetail }) {
   
   return (
     <>
-      <div className="p-4 shadow-md">
+      <div className="p-4 shadow-md mb-60">
         <div className='flex gap-8 items-start mb-8'>
           <img alt="thread creator image" src={owner.avatar} width={60} className="rounded-full" />
           <div className="flex flex-col gap-1 w-full">
@@ -99,14 +107,10 @@ function ThreadDetail({ threadDetail }: { threadDetail: ThreadDetail }) {
             {comments.length}
             )
           </h5>
-          <CommentsList comments={comments} threadId={id} />
+          <CommentsList comments={displayedComments} threadId={id} />
         </div>
       </div>
-      {/* <div className="mb-4">
-        <h5 className="fw-bold mb-2">Beri Komentar</h5>
-        <textarea className="add-thread__input w-100 mb-2" value={comment} onChange={handleInputComment} required />
-        <Button text="Kirim" type="primary" onClick={onSumbit} />
-      </div> */}
+      <CommentAdd threadId={id} listComments={{displayedComments, setDisplayedComments}} />
     </>
   );
 }

@@ -97,6 +97,15 @@ const apiCreateThread = async (data: {title: string, body: string, category: str
   return response;
 }
 
+const apiCreateComment = async (data: { content: string }, idThread: string, token: string) => {
+  const response = await axios.post(`${BASE_URL}/threads/${idThread}/comments`, data, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    }
+  });
+  return response;
+}
+
 
 
 export {
@@ -111,4 +120,5 @@ export {
   apiLoveComment,
   apiUnloveComment,
   apiCreateThread,
+  apiCreateComment,
 }

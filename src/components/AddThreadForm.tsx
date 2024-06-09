@@ -1,12 +1,12 @@
 'use client'
 import useInput from "@/hooks/useInput";
 import dynamic from 'next/dynamic';
-import 'react-quill/dist/quill.snow.css';
 import { useContext, useState } from "react";
 import { apiCreateThread } from "@/utils/utils";
 import { useRouter } from "next/navigation";
 import { useToast } from "@chakra-ui/react";
 import { LoadingContext } from "@/app/providers";
+import 'react-quill/dist/quill.snow.css';
 
 const QuillEditor = dynamic(() => import('react-quill'), { ssr: false });
 
@@ -60,6 +60,8 @@ const AddThreadForm: React.FC<{ token: string }> = ({ token }) => {
         const data = { title, body, category }
         const response = await apiCreateThread(data, token);
         if (response.data.status === 'success') {
+          router.push('/', { scroll: false });
+          router.refresh();
           toast({
             position: 'top',
             title: 'Thread created successfully!',
@@ -68,8 +70,6 @@ const AddThreadForm: React.FC<{ token: string }> = ({ token }) => {
             duration: 3000,
             isClosable: true,
           });
-          router.push('/', { scroll: false });
-          router.refresh();
         }
       } else {
         window.alert('Mohon lengkapi data terlebih dahulu!')
@@ -91,6 +91,7 @@ const AddThreadForm: React.FC<{ token: string }> = ({ token }) => {
         </div>
         <QuillEditor
           value={body}
+          placeholder="New thread ..."
           onChange={handleEditorChange}
           modules={quillModules}
           formats={quillFormats}
