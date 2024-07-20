@@ -40,7 +40,7 @@ function FormRegister() {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-col gap-4">
-        {handleErrorLoginRegister(email, password, konfirmasiPassword) && <div className="text-sm bg-red-400 text-white w-fit p-2 mx-auto rounded">{handleErrorLoginRegister(email, password, konfirmasiPassword)}</div>}
+        {handleErrorLoginRegister(email, password, konfirmasiPassword) && <div className="text-xs bg-red-400 text-white w-fit p-2 mx-auto rounded">{handleErrorLoginRegister(email, password, konfirmasiPassword)}</div>}
         <div className="w-full border border-gray-200 rounded-lg flex">
           <input className="p-4 text-sm rounded-lg w-full focus-visible:outline-none" placeholder="Nama" onChange={handleInputName} />
         </div>

@@ -24,10 +24,10 @@ const handleErrorLoginRegister = (email: string, password: string, konfirmasiPas
   const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()\-_=+\\\|\[\]{};:'",.<>?]).{6,}$/;
 
   if (emailRegex.test(email) === false && email.length > 0) {
-    return 'Email belum sesuai!';
+    return 'Email belum sesuai format!';
   }
   if (passwordRegex.test(password) === false && password.length > 0) {
-    return 'Password belum sesuai!';
+    return 'Huruf besar, karakter spesial, angka dan minimal 6 karakter';
   }
   if (password !== konfirmasiPassword && password.length > 0 && (konfirmasiPassword && konfirmasiPassword.length > 0)) {
     return 'Password dan Ulangi Password tidak sesuai!'
