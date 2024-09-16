@@ -42,17 +42,17 @@ function FormRegister() {
       <div className="flex flex-col gap-4">
         {handleErrorLoginRegister(email, password, konfirmasiPassword) && <div className="text-xs bg-red-400 text-white w-fit p-2 mx-auto rounded">{handleErrorLoginRegister(email, password, konfirmasiPassword)}</div>}
         <div className="w-full border border-gray-200 rounded-lg flex">
-          <input className="p-4 text-sm rounded-lg w-full focus-visible:outline-none" placeholder="Nama" onChange={handleInputName} />
+          <input className="p-4 text-sm rounded-lg w-full focus-visible:outline-none" placeholder="Nama" value={name} onChange={handleInputName} />
         </div>
         <div className="w-full border border-gray-200 rounded-lg flex">
-          <input className="p-4 text-sm rounded-lg w-full focus-visible:outline-none" placeholder="Email Anda" onChange={handleInputEmail} />
+          <input className="p-4 text-sm rounded-lg w-full focus-visible:outline-none" placeholder="Email Anda" value={email} onChange={handleInputEmail} />
         </div>
         <div className="w-full border border-gray-200 rounded-lg flex items-center">
-          <input autoComplete="new-password" className="p-4 text-sm rounded-lg w-full focus-visible:outline-none" placeholder="Password Anda" type={showPassword ? 'text' : 'password'} onChange={handleInputPassword} />
+          <input autoComplete="new-password" className="p-4 text-sm rounded-lg w-full focus-visible:outline-none" placeholder="Password Anda" type={showPassword ? 'text' : 'password'} value={password} onChange={handleInputPassword} />
           <span className="border-l-2 h-fit px-6 cursor-pointer" onClick={handleClickEye}>{showPassword ? <AiFillEyeInvisible size={28} /> : <AiFillEye size={28} />}</span>
         </div>
         <div className="w-full border border-gray-200 rounded-lg flex items-center">
-          <input autoComplete="new-password" className="p-4 text-sm rounded-lg w-full focus-visible:outline-none" placeholder="Ulangi Password" type={showPassword ? 'text' : 'password'} onChange={handleInputKonfirmasiPassword} />
+          <input autoComplete="new-password" className="p-4 text-sm rounded-lg w-full focus-visible:outline-none" placeholder="Ulangi Password" type={showPassword ? 'text' : 'password'} value={konfirmasiPassword} onChange={handleInputKonfirmasiPassword} />
           <span className="border-l-2 h-fit px-6 cursor-pointer" onClick={handleClickEye}>{showPassword ? <AiFillEyeInvisible size={28} /> : <AiFillEye size={28} />}</span>
         </div>
       </div>

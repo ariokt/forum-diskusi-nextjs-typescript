@@ -46,10 +46,10 @@ function FormLogin() {
       {handleErrorLoginRegister(email, password) && <div className="text-sm bg-red-400 text-white w-fit p-2 mx-auto rounded">{handleErrorLoginRegister(email, password)}</div>}
       <div className="flex flex-col gap-4">
         <div className="w-full border border-gray-200 rounded-lg flex">
-          <input name="apkek" autoComplete="off" className="p-4 text-sm rounded-lg w-full focus-visible:outline-none" placeholder="Email akun Anda" type="text" onChange={handleInputEmail} />
+          <input name="apkek" autoComplete="off" className="p-4 text-sm rounded-lg w-full focus-visible:outline-none" placeholder="Email akun Anda" type="text" value={email} onChange={handleInputEmail} />
         </div>
         <div className="w-full border border-gray-200 rounded-lg flex items-center">
-          <input autoComplete="new-password" className="p-4 text-sm rounded-lg w-full focus-visible:outline-none" placeholder="Password akun Anda" type={showPassword ? 'text' : 'password'} onChange={handleInputPassword} />
+          <input autoComplete="new-password" className="p-4 text-sm rounded-lg w-full focus-visible:outline-none" placeholder="Password akun Anda" type={showPassword ? 'text' : 'password'} value={password} onChange={handleInputPassword} />
           <span className="border-l-2 h-fit px-6 cursor-pointer" onClick={handleClickEye}>{showPassword ? <AiFillEyeInvisible size={28} /> : <AiFillEye size={28} />}</span>
         </div>
       </div>
